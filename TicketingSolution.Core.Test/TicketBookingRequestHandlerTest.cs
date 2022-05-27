@@ -5,11 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using Shouldly;
+using TicketingSolution.Core.Model;
+using TicketingSolution.Core.Handler;
 
 namespace TicketingSolution.Core
 {
     public class TicketBookingRequestHandlerTest
     {
+        private readonly TicketBookingRequestHandler _handler;
+        public TicketBookingRequestHandlerTest()
+        {
+            _handler = new TicketBookingRequestHandler();
+
+        }
         [Fact]
         public void ShouldReturnBookingResponseWithRequestValues()
         {
@@ -20,9 +28,8 @@ namespace TicketingSolution.Core
                 Family = "Semsar",
                 Email = "AshkanSemsar@Gmail.com"
             };
-            var Handler = new TicketBookingRequestHandler();
             //Act
-            TicketBookingResult result = Handler.BookService(bookingRequest);
+            TicketBookingResult result = _handler.BookService(bookingRequest);
             //Assert
             //Assert.NotNull(result);
             //Assert.Equal(bookingRequest.Name, result.Name);
@@ -33,6 +40,12 @@ namespace TicketingSolution.Core
             bookingRequest.Name.ShouldBeSameAs(result.Name);
             bookingRequest.Family.ShouldBeSameAs(result.Family);
             bookingRequest.Email.ShouldBeSameAs(result.Email);
+        }
+
+        [Fact]
+        public void ShouldThrowNullExceptionForNullRequest()
+        {
+            Should.Throw<ArgumentNullException>(() => _handler.BookService(null));
         }
     }
 }
