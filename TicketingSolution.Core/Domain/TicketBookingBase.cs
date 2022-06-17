@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace TicketingSolution.Core.Domain
 {
-    public  class TicketBooking:TicketBookingBase
+    public abstract class TicketBookingBase
     {
+        public string Name { get; set; }
+        public string Family { get; set; }
+        public string Email { get; set; }
     }
 }
