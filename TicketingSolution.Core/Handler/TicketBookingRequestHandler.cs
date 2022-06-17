@@ -18,13 +18,12 @@ namespace TicketingSolution.Core.Handler
         {
             if(request is null) 
                 throw new ArgumentNullException(nameof(request));
-            _ticketBookingService.Save(new TicketBooking { Name = request.Name, Family = request.Family, Email = request.Email });
-            return new TicketBookingResult
-            {
-                Name = request.Name,
-                Family = request.Family,
-                Email = request.Email
-            };
+            _ticketBookingService.Save(CreateTicketBookingObject<TicketBooking>(request));
+            return CreateTicketBookingObject<TicketBookingResult>(request);
+        }
+        private static TTicketBooking CreateTicketBookingObject<TTicketBooking>(TicketBookingRequest ticketBooking) where TTicketBooking:TicketBookingBase ,new()
+        {
+            return new TTicketBooking { Email = ticketBooking.Email,Family=ticketBooking.Family,Name=ticketBooking.Name };
         }
     }
 }
