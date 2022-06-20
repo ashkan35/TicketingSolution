@@ -5,7 +5,7 @@ using TicketingSolution.Core.Model;
 
 namespace TicketingSolution.Core.Handler
 {
-    public  class TicketBookingRequestHandler
+    public class TicketBookingRequestHandler
     {
         private readonly ITicketBookingService _ticketBookingService;
 
@@ -16,14 +16,16 @@ namespace TicketingSolution.Core.Handler
 
         public TicketBookingResult BookService(TicketBookingRequest request)
         {
-            if(request is null) 
+            if (request is null)
                 throw new ArgumentNullException(nameof(request));
-            _ticketBookingService.Save(CreateTicketBookingObject<TicketBooking>(request));
+            var availabaleTickets = _ticketBookingService.GetAvailableTickets(request.Date);
+            if (availabaleTickets.Any())
+                _ticketBookingService.Save(CreateTicketBookingObject<TicketBooking>(request));
             return CreateTicketBookingObject<TicketBookingResult>(request);
         }
-        private static TTicketBooking CreateTicketBookingObject<TTicketBooking>(TicketBookingRequest ticketBooking) where TTicketBooking:TicketBookingBase ,new()
+        private static TTicketBooking CreateTicketBookingObject<TTicketBooking>(TicketBookingRequest ticketBooking) where TTicketBooking : TicketBookingBase, new()
         {
-            return new TTicketBooking { Email = ticketBooking.Email,Family=ticketBooking.Family,Name=ticketBooking.Name };
+            return new TTicketBooking { Email = ticketBooking.Email, Family = ticketBooking.Family, Name = ticketBooking.Name };
         }
     }
 }

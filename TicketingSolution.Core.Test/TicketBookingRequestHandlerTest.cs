@@ -1,83 +1,103 @@
-﻿using System;
+﻿using Shouldly;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using Shouldly;
-using TicketingSolution.Core.Model;
-using TicketingSolution.Core.Handler;
+
 using Moq;
 using TicketingSolution.Core.DataServisec;
 using TicketingSolution.Core.Domain;
+using TicketingSolution.Core.Handler;
+using TicketingSolution.Core.Model;
 
 namespace TicketingSolution.Core
 {
-    public class TicketBookingRequestHandlerTest
+    public class Ticket_Booking_Request_Handler_Test
     {
-        private readonly TicketBookingRequest _request;
         private readonly TicketBookingRequestHandler _handler;
+        private readonly TicketBookingRequest _request;
         private readonly Mock<ITicketBookingService> _ticketBookingServiceMock;
         private List<Ticket> _availableTickets;
 
-        public TicketBookingRequestHandlerTest()
-        {
-            _request = new TicketBookingRequest
-            {
-                Name = "Ashkan",
-                Family = "Semsar",
-                Email = "AshkanSemsar@Gmail.com",
-                Date = DateTime.Now
-            };
-            _availableTickets = new List<Ticket> { new Ticket() };
-            _ticketBookingServiceMock = new Mock<ITicketBookingService>();
-            _ticketBookingServiceMock.Setup(q => q.GetAvailableTickets(_request.Date)).Returns(_availableTickets);
-            _handler = new TicketBookingRequestHandler(_ticketBookingServiceMock.Object);
-
-
-        }
-        [Fact]
-        public void ShouldReturnBookingResponseWithRequestValues()
+        public Ticket_Booking_Request_Handler_Test()
         {
             //Arrange
+            _request = new TicketBookingRequest
+            {
+                Name = "Test Name",
+                Family = "Test Family",
+                Email = "TestEmail",
+                Date = DateTime.Now
+            };
+
+            _availableTickets = new List<Ticket>() { new Ticket() { Id = 1 } };
+            _ticketBookingServiceMock = new Mock<ITicketBookingService>();
+            _ticketBookingServiceMock.Setup(q => q.GetAvailableTickets(_request.Date))
+                .Returns(_availableTickets);
+
+            _handler = new TicketBookingRequestHandler(_ticketBookingServiceMock.Object);
+
+        }
+
+        [Fact]
+        public void Should_Return_Ticket_Booking_Response_With_Request_Values()
+        {
 
             //Act
-            TicketBookingResult result = _handler.BookService(_request);
+            var Result = _handler.BookService(_request);
+
             //Assert
-            //Assert.NotNull(result);
-            //Assert.Equal(bookingRequest.Name, result.Name);
-            //Assert.Equal(bookingRequest.Family, result.Family);
-            //Assert.Equal(bookingRequest.Email, result.Email);
-            //Assert with Shouldly
-            result.ShouldNotBeNull();
-            _request.Name.ShouldBeSameAs(result.Name);
-            _request.Family.ShouldBeSameAs(result.Family);
-            _request.Email.ShouldBeSameAs(result.Email);
+            //Assert.NotNull(Result);
+            //Assert.Equal(Result.Name, BookingRequest.Name);
+            //Assert.Equal(Result.Family, BookingRequest.Family);
+            //Assert.Equal(Result.Email, BookingRequest.Email);
+
+            //Assert by Shouldly
+            Result.ShouldNotBeNull();
+            Result.Name.ShouldBe(_request.Name);
+            Result.Family.ShouldBe(_request.Family);
+            Result.Email.ShouldBe(_request.Email);
         }
 
         [Fact]
-        public void ShouldThrowNullExceptionForNullRequest()
+        public void Should_Throw_Exception_For_Null_Request()
         {
-
-            Should.Throw<ArgumentNullException>(() => _handler.BookService(null));
+            var exception = Should.Throw<ArgumentNullException>(() => _handler.BookService(null));
+            exception.ParamName.ShouldBe("request");
         }
+
         [Fact]
-        public void ShouldSaveTicketBookingRequest()
+        public void Should_Save_Ticket_Booking_Request()
         {
-            TicketBooking savedBooking = null;
-            _ticketBookingServiceMock.Setup(x => x.Save(It.IsAny<TicketBooking>())).Callback<TicketBooking>(c => { savedBooking = c; });
+            TicketBooking SavedBooking = null;
+            _ticketBookingServiceMock.Setup(x => x.Save(It.IsAny<TicketBooking>()))
+                 .Callback<TicketBooking>(booking =>
+                 {
+                     SavedBooking = booking;
+                 });
+
             _handler.BookService(_request);
+
             _ticketBookingServiceMock.Verify(x => x.Save(It.IsAny<TicketBooking>()), Times.Once);
 
+            SavedBooking.ShouldNotBeNull();
+            SavedBooking.Name.ShouldBe(_request.Name);
+            SavedBooking.Family.ShouldBe(_request.Family);
+            SavedBooking.Email.ShouldBe(_request.Email);
         }
+
         [Fact]
-        public void ShouldNotSaveTicketBookingRequestIfNoTicketAvaillable()
+        public void Should_Not_Save_Ticket_Booking_Request_If_None_Available()
         {
             _availableTickets.Clear();
             _handler.BookService(_request);
             _ticketBookingServiceMock.Verify(x => x.Save(It.IsAny<TicketBooking>()), Times.Never);
-
         }
+
+ 
+
+
     }
 }
-

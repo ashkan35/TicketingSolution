@@ -9,5 +9,6 @@ namespace TicketingSolution.Core.Domain
     public class Ticket
     {
         DateTime Date { get; set; }
+        public int Id { get; set; }
     }
 }
