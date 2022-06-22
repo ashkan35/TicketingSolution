@@ -8,5 +8,6 @@ namespace TicketingSolution.Core.Domain
 {
     public  class TicketBooking:TicketBookingBase
     {
+        public int TicketId { get; set; }
     }
 }
