@@ -8,9 +8,10 @@ using Xunit;
 
 using Moq;
 using TicketingSolution.Core.DataServices;
-using TicketingSolution.Core.Domain;
+using TicketingSolution.Core.Enum;
 using TicketingSolution.Core.Handler;
 using TicketingSolution.Core.Model;
+using TicketingSolution.Domain.Domain;
 
 namespace TicketingSolution.Core
 {
@@ -95,6 +96,40 @@ namespace TicketingSolution.Core
             _availableTickets.Clear();
             _handler.BookService(_request);
             _ticketBookingServiceMock.Verify(x => x.Save(It.IsAny<TicketBooking>()), Times.Never);
+        }
+
+        [Theory]
+        [InlineData(BookingResultFlag.Success,true)]
+        [InlineData(BookingResultFlag.Failure,false)]
+        public void Should_ReturnSuccessOrFailure_Flag_In_Result(BookingResultFlag flag, bool isAvailable)
+        {
+            if (!isAvailable)
+            {
+                _availableTickets.Clear();
+            }
+
+            var result = _handler.BookService(_request);
+            result.Flag.ShouldBe(flag);
+        }
+        [Theory]
+        [InlineData(1, true)]
+        [InlineData(null, false)]
+        public void Should_Return_TicketBookingId_In_Result(int? ticketBookingId, bool isAvailable)
+        {
+            if (!isAvailable)
+            {
+                _availableTickets.Clear();
+            }
+            else
+            {
+                _ticketBookingServiceMock.Setup(x => x.Save(It.IsAny<TicketBooking>())).Callback<TicketBooking>(booking =>
+                {
+                    booking.TicketId = ticketBookingId.Value;
+                });
+            }
+            var result= _handler.BookService(_request);
+            result.TicketBookingId.ShouldBe(ticketBookingId);
+     
         }
 
  

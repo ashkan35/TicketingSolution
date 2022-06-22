@@ -1,4 +1,5 @@
-﻿using TicketingSolution.Core.Domain;
+﻿
+using TicketingSolution.Domain.BaseModels;
 
 namespace TicketingSolution.Core.Model
 {
