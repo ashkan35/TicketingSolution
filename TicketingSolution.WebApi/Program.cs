@@ -1,8 +1,16 @@
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
+using TicketingSolution.Persistence;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+var connectionString = "DataSource=:memory";
+var connection = new SqliteConnection(connectionString);
+connection.Open();
+builder.Services.AddDbContext<TicketingSolutionDbContext>(o => o.UseSqlite(connection));
 
 var app = builder.Build();
 
