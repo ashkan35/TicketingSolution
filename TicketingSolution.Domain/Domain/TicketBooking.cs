@@ -1,4 +1,5 @@
-﻿using TicketingSolution.Domain.BaseModels;
+﻿using System.ComponentModel.DataAnnotations;
+using TicketingSolution.Domain.BaseModels;
 
 namespace TicketingSolution.Domain.Domain
 {

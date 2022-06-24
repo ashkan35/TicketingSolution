@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketingSolution.Domain", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketingSolution.Persistence", "TicketingSolution.Persistence\TicketingSolution.Persistence.csproj", "{46F128CA-A34A-43E8-853A-BCC5A5861522}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketingSolution.Persistence.Tests", "TicketingSolution.Persistence.Tests\TicketingSolution.Persistence.Tests.csproj", "{BA8EFC6E-A7D8-4DA1-B179-F7C6B61FC29A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketBookingSoloution.Persistence.Test", "TicketBookingSoloution.Persistence.Test\TicketBookingSoloution.Persistence.Test.csproj", "{D1435DE6-FFD5-4EAC-B683-47E11241AB25}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{46F128CA-A34A-43E8-853A-BCC5A5861522}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46F128CA-A34A-43E8-853A-BCC5A5861522}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46F128CA-A34A-43E8-853A-BCC5A5861522}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BA8EFC6E-A7D8-4DA1-B179-F7C6B61FC29A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BA8EFC6E-A7D8-4DA1-B179-F7C6B61FC29A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BA8EFC6E-A7D8-4DA1-B179-F7C6B61FC29A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BA8EFC6E-A7D8-4DA1-B179-F7C6B61FC29A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1435DE6-FFD5-4EAC-B683-47E11241AB25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1435DE6-FFD5-4EAC-B683-47E11241AB25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1435DE6-FFD5-4EAC-B683-47E11241AB25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1435DE6-FFD5-4EAC-B683-47E11241AB25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
