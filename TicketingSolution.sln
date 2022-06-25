@@ -11,11 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketingSolution.Domain", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketingSolution.Persistence", "TicketingSolution.Persistence\TicketingSolution.Persistence.csproj", "{46F128CA-A34A-43E8-853A-BCC5A5861522}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketBookingSoloution.Persistence.Test", "TicketBookingSoloution.Persistence.Test\TicketBookingSoloution.Persistence.Test.csproj", "{D1435DE6-FFD5-4EAC-B683-47E11241AB25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketBookingSoloution.Persistence.Test", "TicketBookingSoloution.Persistence.Test\TicketBookingSoloution.Persistence.Test.csproj", "{D1435DE6-FFD5-4EAC-B683-47E11241AB25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketingSolution.WebApi", "TicketingSolution.WebApi\TicketingSolution.WebApi.csproj", "{787B1000-463F-4016-B33C-577CB31D234B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketingSolution.WebApi", "TicketingSolution.WebApi\TicketingSolution.WebApi.csproj", "{787B1000-463F-4016-B33C-577CB31D234B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketingSoloution.WebApi.Test", "TicketingSoloution.WebApi.Test\TicketingSoloution.WebApi.Test.csproj", "{9EB2D6F4-6811-428A-BB69-87AA7B3D4D40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketingSolution.WebApi.Test", "TicketingSoloution.WebApi.Test\TicketingSolution.WebApi.Test.csproj", "{9EB2D6F4-6811-428A-BB69-87AA7B3D4D40}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

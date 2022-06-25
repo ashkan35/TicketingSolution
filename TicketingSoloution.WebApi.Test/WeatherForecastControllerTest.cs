@@ -1,16 +1,16 @@
-using Xunit;
-using Moq;
-using TicketingSolution.WebApi.Controllers;
-using Microsoft.Extensions.Logging;
 using System.Linq;
+using Microsoft.Extensions.Logging;
+using Moq;
 using Shouldly;
+using TicketingSolution.WebApi.Controllers;
+using Xunit;
 
-namespace TicketingSoloution.WebApi.Test
+namespace TicketingSolution.WebApi.Test
 {
-    public class WeatherForcastControllerTest
+    public class WeatherForecastControllerTest
     {
         [Fact]
-        public void Should_Return_WeatherForcastItems()
+        public void Should_Return_WeatherForecastItems()
         {
             //Arrange
             var loggerMoq = new Mock<ILogger<WeatherForecastController>>();
